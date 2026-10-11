@@ -1,0 +1,22 @@
+name: macOS Free Runner Probe
+
+on:
+  push:
+    paths:
+      - '.github/workflows/macos-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify free macOS runner
+        run: |
+          sw_vers
+          xcodebuild -version
+          echo "MUEEN_MACOS_RUNNER_OK"
